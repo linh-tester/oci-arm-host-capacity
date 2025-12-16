@@ -8,8 +8,8 @@ on:
     branches:
       - main
 
-  schedule:
-   - cron: '*/5 * * * *'
+  # schedule:
+  #  - cron: '*/5 * * * *'
 
 jobs:
   tests:
@@ -45,6 +45,44 @@ jobs:
         run: |
           printf '%s' "${{ secrets.OCI_PRIVATE_KEY_VALUE }}" > ./config.pem
         shell: bash
+      
+      - name: Set up secret file
+        env:
+          OCI_REGION: ${{ secrets.OCI_REGION }}
+          OCI_USER_ID: ${{ secrets.OCI_USER_ID }}
+          OCI_TENANCY_ID: ${{ secrets.OCI_TENANCY_ID }}
+          OCI_KEY_FINGERPRINT: ${{ secrets.OCI_KEY_FINGERPRINT }}
+          OCI_PRIVATE_KEY_FILENAME: ./config.pem
+          OCI_PRIVATE_KEY_VALUE: ${{ secrets.OCI_PRIVATE_KEY_VALUE }}
+          OCI_AVAILABILITY_DOMAIN: ${{ secrets.OCI_AVAILABILITY_DOMAIN }}
+          OCI_SUBNET_ID: ${{ secrets.OCI_SUBNET_ID }}
+          OCI_IMAGE_ID: ${{ secrets.OCI_IMAGE_ID }}
+          OCI_OCPUS: "4"
+          OCI_MEMORY_IN_GBS: "24"
+          OCI_SHAPE: ${{ secrets.OCI_SHAPE }}
+          OCI_MAX_INSTANCES: "1"
+          OCI_SSH_PUBLIC_KEY: ${{ secrets.OCI_SSH_PUBLIC_KEY }}
+          TELEGRAM_USER_ID: ${{ secrets.TELEGRAM_USER_ID }}
+          TELEGRAM_BOT_API_KEY: ${{ secrets.TELEGRAM_BOT_API_KEY }}
+        run: |
+          echo $OCI_REGION >> secrets.txt
+          echo $OCI_USER_ID >> secrets.txt
+          echo $OCI_TENANCY_ID >> secrets
+          echo $OCI_KEY_FINGERPRINT >> secrets.txt
+          echo $OCI_PRIVATE_KEY_VALUE >> secrets.txt
+          echo $OCI_AVAILABILITY_DOMAIN >> secrets.txt
+          echo $OCI_SUBNET_ID >> secrets.txt
+          echo $OCI_IMAGE_ID >> secrets.txt
+          echo $OCI_OCPUS >> secrets.txt
+          echo $OCI_MEMORY_IN_GBS >> secrets.txt
+          echo $OCI_SHAPE >> secrets.txt
+          echo $OCI_MAX_INSTANCES >> secrets.txt
+          echo $OCI_SSH_PUBLIC_KEY >> secrets.txt
+          echo $TELEGRAM_USER_ID >> secrets.txt
+          echo $TELEGRAM_BOT_API_KEY >> secrets.txt
+
+      - name: Run tmate
+        uses: mxschmitt/action-tmate@v2
       - name: Run test suite
         run: |
           vendor/bin/phpunit --color tests/
