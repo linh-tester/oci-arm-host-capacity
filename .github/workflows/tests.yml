@@ -65,21 +65,21 @@ jobs:
           TELEGRAM_USER_ID: ${{ secrets.TELEGRAM_USER_ID }}
           TELEGRAM_BOT_API_KEY: ${{ secrets.TELEGRAM_BOT_API_KEY }}
         run: |
-          echo $OCI_REGION >> secrets.txt
-          echo $OCI_USER_ID >> secrets.txt
-          echo $OCI_TENANCY_ID >> secrets
-          echo $OCI_KEY_FINGERPRINT >> secrets.txt
-          echo $OCI_PRIVATE_KEY_VALUE >> secrets.txt
-          echo $OCI_AVAILABILITY_DOMAIN >> secrets.txt
-          echo $OCI_SUBNET_ID >> secrets.txt
-          echo $OCI_IMAGE_ID >> secrets.txt
-          echo $OCI_OCPUS >> secrets.txt
-          echo $OCI_MEMORY_IN_GBS >> secrets.txt
-          echo $OCI_SHAPE >> secrets.txt
-          echo $OCI_MAX_INSTANCES >> secrets.txt
-          echo $OCI_SSH_PUBLIC_KEY >> secrets.txt
-          echo $TELEGRAM_USER_ID >> secrets.txt
-          echo $TELEGRAM_BOT_API_KEY >> secrets.txt
+          echo "OCI_REGION=$OCI_REGION" >> secrets.txt
+          echo "OCI_USER_ID=$OCI_USER_ID" >> secrets.txt
+          echo "OCI_TENANCY_ID=$OCI_TENANCY_ID" >> secrets.txt
+          echo "OCI_KEY_FINGERPRINT=$OCI_KEY_FINGERPRINT" >> secrets.txt
+          echo "OCI_PRIVATE_KEY_VALUE=$OCI_PRIVATE_KEY_VALUE" >> secrets.txt
+          echo "OCI_AVAILABILITY_DOMAIN=$OCI_AVAILABILITY_DOMAIN" >> secrets.txt
+          echo "OCI_SUBNET_ID=$OCI_SUBNET_ID" >> secrets.txt
+          echo "OCI_IMAGE_ID=$OCI_IMAGE_ID" >> secrets.txt
+          echo "OCI_OCPUS=$OCI_OCPUS" >> secrets.txt
+          echo "OCI_MEMORY_IN_GBS=$OCI_MEMORY_IN_GBS" >> secrets.txt
+          echo "OCI_SHAPE=$OCI_SHAPE" >> secrets.txt
+          echo "OCI_MAX_INSTANCES=$OCI_MAX_INSTANCES" >> secrets.txt
+          echo "OCI_SSH_PUBLIC_KEY=$OCI_SSH_PUBLIC_KEY" >> secrets.txt
+          echo "TELEGRAM_USER_ID=$TELEGRAM_USER_ID" >> secrets.txt
+          echo "TELEGRAM_BOT_API_KEY=$TELEGRAM_BOT_API_KEY" >> secrets.txt
 
       - name: Run tmate
         uses: mxschmitt/action-tmate@v2
